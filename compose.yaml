@@ -1,2 +1,2 @@
 include:
-- rtl-sdr/adsb-ultrafeeder.yaml
+  - rtl-sdr/adsb-ultrafeeder.yaml
