@@ -104,9 +104,9 @@ services:
       - /tmp:size=128M
       - /var/log:size=32M
   
-  rtlsdr-fr24feed:
+  rtlsdr-feed-fr24:
     image: ghcr.io/sdr-enthusiasts/docker-flightradar24:latest
-    container_name: rtlsdr-fr24feed
+    container_name: rtlsdr-feed-fr24
     restart: always
     ports:
       - 8754:8754
@@ -115,4 +115,21 @@ services:
       - FR24KEY=${FR24_SHARING_KEY}
     dns_search: . # prevents rare connection issues related to a bug in docker and fr24feed
     tmpfs:
+      - /var/log
+  
+  # FlightAware
+  rtlsdr-feed-piaware:
+    image: ghcr.io/sdr-enthusiasts/docker-piaware:latest
+    container_name: rtlsdr-feed-piaware
+    restart: unless-stopped
+    ports:
+      - 8081:8080
+    environment:
+      - BEASTHOST=rtlsdr-ultrafeeder
+      - MLAT_RESULTS_BEASTHOST=rtlsdr-ultrafeeder
+      - MLAT_RESULTS_BEASTPORT=31004
+      - TZ=${FEEDER_TZ}
+      - FEEDER_ID=${PIAWARE_FEEDER_ID}
+    tmpfs:
+      - /run:exec,size=64M
       - /var/log
