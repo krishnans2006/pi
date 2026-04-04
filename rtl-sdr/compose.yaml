@@ -1,6 +1,8 @@
 # Adapted from
-# https://github.com/sdr-enthusiasts/docker-adsb-ultrafeeder/blob/main/docker-compose.yml
-# https://github.com/sdr-enthusiasts/docker-dump978?tab=readme-ov-file#up-and-running---docker-compose-with-ultrafeeder-radarbox-and-piaware
+# - https://github.com/sdr-enthusiasts/docker-adsb-ultrafeeder/blob/main/docker-compose.yml
+# - https://sdr-enthusiasts.gitbook.io/ads-b/foundations/deploy-ultrafeeder-container
+# - https://sdr-enthusiasts.gitbook.io/ads-b/feeder-containers/feeding-flightradar24
+# - https://sdr-enthusiasts.gitbook.io/ads-b/feeder-containers/feeding-flightaware-piaware
 
 services:
   rtlsdr-ultrafeeder:
