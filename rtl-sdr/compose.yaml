@@ -42,19 +42,19 @@ services:
       #       - remove "adsb,dump978,30978,uat_in;" if you don't have dump978 and a UAT dongle connected to your station
       #       - !!! make sure that each line ends with a semicolon ";",  with the exception of the last line which shouldn't have a ";" !!!
       - ULTRAFEEDER_CONFIG=
-        adsb,feed.adsb.fi,30004,beast_reduce_plus_out;
-        adsb,in.adsb.lol,30004,beast_reduce_plus_out;
-        adsb,feed.airplanes.live,30004,beast_reduce_plus_out;
-        adsb,feed.planespotters.net,30004,beast_reduce_plus_out;
-        adsb,feed.theairtraffic.com,30004,beast_reduce_plus_out;
-        adsb,data.avdelphi.com,24999,beast_reduce_plus_out;
-        adsb,dati.flyitalyadsb.com,4905,beast_reduce_plus_out;
-        mlat,feed.adsb.fi,31090,39000;
-        mlat,in.adsb.lol,31090,39001;
-        mlat,feed.airplanes.live,31090,39002;
-        mlat,mlat.planespotters.net,31090,39003;
-        mlat,feed.theairtraffic.com,31090,39004;
-        mlat,dati.flyitalyadsb.com,30100,39007;
+        adsb,feed.adsb.fi,30004,beast_reduce_plus_out,uuid=${ADSBFI_UUID};
+        mlat,feed.adsb.fi,31090,uuid=${ADSBFI_UUID};
+        adsb,in.adsb.lol,30004,beast_reduce_plus_out,uuid=${ADSBLOL_UUID};
+        mlat,in.adsb.lol,31090,uuid=${ADSBLOL_UUID};
+        adsb,feed.airplanes.live,30004,beast_reduce_plus_out,uuid=${AIRPLANESLIVE_UUID};
+        mlat,feed.airplanes.live,31090,uuid=${AIRPLANESLIVE_UUID};
+        adsb,feed.planespotters.net,30004,beast_reduce_plus_out,uuid=${PLANESPOTTERS_UUID};
+        mlat,mlat.planespotters.net,31090,uuid=${PLANESPOTTERS_UUID};
+        adsb,feed.theairtraffic.com,30004,beast_reduce_plus_out,uuid=${THEAIRTRAFFIC_UUID};
+        mlat,feed.theairtraffic.com,31090,uuid=${THEAIRTRAFFIC_UUID};
+        adsb,data.avdelphi.com,24999,beast_reduce_plus_out,uuid=${AVDELPHI_UUID};
+        adsb,dati.flyitalyadsb.com,4905,beast_reduce_plus_out,uuid=${FLYITALYADSB_UUID};
+        mlat,dati.flyitalyadsb.com,30100,uuid=${FLYITALYADSB_UUID}
       # If you really want to feed ADSBExchange, you can do so by adding this above:
       #        adsb,feed1.adsbexchange.com,30004,beast_reduce_plus_out,uuid=${ADSBX_UUID};
       #        mlat,feed.adsbexchange.com,31090,39008,uuid=${ADSBX_UUID}
@@ -103,3 +103,16 @@ services:
       - /run:exec,size=256M
       - /tmp:size=128M
       - /var/log:size=32M
+  
+  rtlsdr-fr24feed:
+    image: ghcr.io/sdr-enthusiasts/docker-flightradar24:latest
+    container_name: rtlsdr-fr24feed
+    restart: always
+    ports:
+      - 8754:8754
+    environment:
+      - BEASTHOST=rtlsdr-ultrafeeder
+      - FR24KEY=${FR24_SHARING_KEY}
+    dns_search: . # prevents rare connection issues related to a bug in docker and fr24feed
+    tmpfs:
+      - /var/log
