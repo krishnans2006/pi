@@ -92,10 +92,10 @@ services:
       # --------------------------------------------------
       # Prometheus and InfluxDB connection parameters:
       # (See above for the correct image tag you must use to enable this)
-      - INFLUXDBV2_URL=${INFLUX_URL}
-      - INFLUXDBV2_TOKEN=${INFLUX_TOKEN}
-      - INFLUXDBV2_BUCKET=${INFLUX_BUCKET}
-      - PROMETHEUS_ENABLE=true
+      # - INFLUXDBV2_URL=${INFLUX_URL}
+      # - INFLUXDBV2_TOKEN=${INFLUX_TOKEN}
+      # - INFLUXDBV2_BUCKET=${INFLUX_BUCKET}
+      # - PROMETHEUS_ENABLE=true
     volumes:
       - /opt/adsb/ultrafeeder/globe_history:/var/globe_history
       - /opt/adsb/ultrafeeder/graphs1090:/var/lib/collectd
