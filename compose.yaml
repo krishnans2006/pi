@@ -1,2 +1,3 @@
 include:
-  - rtl-sdr/adsb-ultrafeeder.yaml
+  - rtl-sdr/compose.yaml
+  - jellyfin/compose.yaml
