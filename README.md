@@ -19,3 +19,5 @@ Things to set up:
 - Add Jellyfin user:
   - `sudo useradd -m jellyfin`
   - `id jellyfin` to get UID and GID, which goes in `jellyfin/compose.yaml`
+- Add env vars for `rtl-sdr`:
+  - `scp ~/Tech/Hobby/pi/rtl-sdr/.env krishnan@krishnan-pi.local:~/pi/rtl-sdr/.env`
