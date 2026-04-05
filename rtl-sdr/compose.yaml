@@ -97,8 +97,8 @@ services:
       # - INFLUXDBV2_BUCKET=${INFLUX_BUCKET}
       # - PROMETHEUS_ENABLE=true
     volumes:
-      - /opt/rtlsdr/ultrafeeder/globe_history:/var/globe_history
-      - /opt/rtlsdr/ultrafeeder/graphs1090:/var/lib/collectd
+      - /data/rtlsdr/ultrafeeder/globe_history:/var/globe_history
+      - /data/rtlsdr/ultrafeeder/graphs1090:/var/lib/collectd
       - /proc/diskstats:/proc/diskstats:ro
       - /dev/bus/usb:/dev/bus/usb
     tmpfs:
@@ -117,7 +117,7 @@ services:
       - FR24KEY=${FR24_SHARING_KEY}
     dns_search: . # prevents rare connection issues related to a bug in docker and fr24feed
     tmpfs:
-      - /var/log
+      - /var/log:size=16M
   
   # FlightAware
   rtlsdr-feed-piaware:
@@ -134,4 +134,4 @@ services:
       - FEEDER_ID=${PIAWARE_FEEDER_ID}
     tmpfs:
       - /run:exec,size=64M
-      - /var/log
+      - /var/log:size=16M

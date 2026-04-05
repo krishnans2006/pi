@@ -8,8 +8,8 @@ services:
       - 8096:8096/tcp
       - 7359:7359/udp
     volumes:
-      - /path/to/config:/config
-      - /path/to/cache:/cache
+      - /data/jellyfin/config:/config
+      - /data/jellyfin/cache:/cache
       - type: bind
         source: /path/to/media
         target: /media
