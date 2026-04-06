@@ -2,6 +2,16 @@
 
 Docker compose files for services running on my Raspberry Pi 5
 
+Ports:
+
+| Port | Service | Functionality |
+| --- | --- | --- |
+| 8000/tcp | RTL-SDR | Web Dashboard (tar1090) |
+| 8001/tcp | RTL-SDR | FlightRadar24 Feed Status |
+| 8002/tcp | RTL-SDR | FlightAware Feed Status + SkyAware Dashboard |
+| 8096/tcp | Jellyfin | Web Frontend (HTTP) - Accessible on browser or a Jellyfin client |
+| 7359/udp | Jellyfin | Client Discovery: A broadcast will return detailed info (name, IP, ID) |
+
 Things to set up:
 - Tailscale:
   - `curl -fsSL https://tailscale.com/install.sh | sh`

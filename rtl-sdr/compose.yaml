@@ -16,7 +16,7 @@ services:
     device_cgroup_rules:
       - "c 189:* rwm"
     ports:
-      - 8080:80 # to expose the web interface
+      - 8000:80 # to expose the web interface
       # - 9273-9274:9273-9274 # to expose the statistics interface to Prometheus
     environment:
       # --------------------------------------------------
@@ -111,7 +111,7 @@ services:
     container_name: rtlsdr-feed-fr24
     restart: always
     ports:
-      - 8754:8754
+      - 8001:8754
     environment:
       - BEASTHOST=rtlsdr-ultrafeeder
       - FR24KEY=${FR24_SHARING_KEY}
@@ -125,7 +125,7 @@ services:
     container_name: rtlsdr-feed-piaware
     restart: unless-stopped
     ports:
-      - 8081:8080
+      - 8002:8080
     environment:
       - BEASTHOST=rtlsdr-ultrafeeder
       - MLAT_RESULTS_BEASTHOST=rtlsdr-ultrafeeder
