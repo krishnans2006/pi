@@ -1,0 +1,32 @@
+name: immich-backup
+
+services:
+  backup:
+    image: rclone/rclone:latest
+    container_name: immich_backup
+    restart: unless-stopped
+    entrypoint:
+      - /bin/sh
+      - /scripts/backup.sh
+    environment:
+      BACKUP_INTERVAL_SECONDS: ${BACKUP_INTERVAL_SECONDS:-86400}
+      BACKUP_RETRY_INTERVAL_SECONDS: ${BACKUP_RETRY_INTERVAL_SECONDS:-3600}
+      GOOGLE_DRIVE_CLIENT_ID: ${GOOGLE_DRIVE_CLIENT_ID:?Set GOOGLE_DRIVE_CLIENT_ID in .env}
+      GOOGLE_DRIVE_CLIENT_SECRET: ${GOOGLE_DRIVE_CLIENT_SECRET:?Set GOOGLE_DRIVE_CLIENT_SECRET in .env}
+      GOOGLE_DRIVE_TOKEN: ${GOOGLE_DRIVE_TOKEN:?Set GOOGLE_DRIVE_TOKEN in .env}
+      RCLONE_CRYPT_PASSWORD: ${RCLONE_CRYPT_PASSWORD:?Set RCLONE_CRYPT_PASSWORD in .env}
+      RCLONE_CRYPT_SALT: ${RCLONE_CRYPT_SALT:?Set RCLONE_CRYPT_SALT in .env}
+      RCLONE_REMOTE_PATH: ${RCLONE_REMOTE_PATH:?Set RCLONE_REMOTE_PATH in .env}
+    volumes:
+      - type: bind
+        source: ${UPLOAD_LOCATION:?Set UPLOAD_LOCATION in .env}
+        target: /source
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ./backup.sh
+        target: /scripts/backup.sh
+        read_only: true
+        bind:
+          create_host_path: false

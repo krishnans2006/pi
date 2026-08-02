@@ -2,3 +2,4 @@ include:
   - rtl-sdr/compose.yaml
   - jellyfin/compose.yaml
   - immich/compose.yaml
+  - immich-backup/compose.yaml
