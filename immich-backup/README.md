@@ -51,6 +51,8 @@ resulting token and the values in `.env`.
 
    Keep the crypt password and salt in a password manager. Both are required
    for a restore, and changing either value makes existing backups unreadable.
+   Enter their plain values in `.env`, not output from `rclone obscure`; the
+   startup script obscures them when it generates the temporary rclone config.
 
 5. Start the service:
 

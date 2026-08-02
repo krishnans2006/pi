@@ -48,6 +48,9 @@ CONFIG_FILE=/tmp/rclone.conf
 umask 077
 : > "$CONFIG_FILE"
 
+CRYPT_PASSWORD_OBSCURED="$(rclone obscure "$RCLONE_CRYPT_PASSWORD")"
+CRYPT_SALT_OBSCURED="$(rclone obscure "$RCLONE_CRYPT_SALT")"
+
 rclone --config "$CONFIG_FILE" config create gdrive drive \
   client_id "$GOOGLE_DRIVE_CLIENT_ID" \
   client_secret "$GOOGLE_DRIVE_CLIENT_SECRET" \
@@ -59,11 +62,11 @@ rclone --config "$CONFIG_FILE" config create gdrive drive \
 
 rclone --config "$CONFIG_FILE" config create encrypted crypt \
   remote "$RCLONE_REMOTE_PATH" \
-  password "$RCLONE_CRYPT_PASSWORD" \
-  password2 "$RCLONE_CRYPT_SALT" \
+  password "$CRYPT_PASSWORD_OBSCURED" \
+  password2 "$CRYPT_SALT_OBSCURED" \
   filename_encryption standard \
   directory_name_encryption true \
-  --obscure \
+  --no-obscure \
   --non-interactive \
   --no-output
 
