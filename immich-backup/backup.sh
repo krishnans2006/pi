@@ -13,6 +13,12 @@ log() {
 : "${RCLONE_CRYPT_SALT:?RCLONE_CRYPT_SALT must be set}"
 : "${RCLONE_REMOTE_PATH:?RCLONE_REMOTE_PATH must be set}"
 
+# RCLONE_CRYPT_PASSWORD is also a backend override recognized by rclone. Keep
+# its plain value in a non-exported shell variable, then remove the override.
+CRYPT_PASSWORD_PLAIN="$RCLONE_CRYPT_PASSWORD"
+CRYPT_SALT_PLAIN="$RCLONE_CRYPT_SALT"
+unset RCLONE_CRYPT_PASSWORD RCLONE_CRYPT_SALT
+
 BACKUP_INTERVAL_SECONDS="${BACKUP_INTERVAL_SECONDS:-86400}"
 BACKUP_RETRY_INTERVAL_SECONDS="${BACKUP_RETRY_INTERVAL_SECONDS:-3600}"
 
@@ -48,8 +54,8 @@ CONFIG_FILE=/tmp/rclone.conf
 umask 077
 : > "$CONFIG_FILE"
 
-CRYPT_PASSWORD_OBSCURED="$(rclone obscure "$RCLONE_CRYPT_PASSWORD")"
-CRYPT_SALT_OBSCURED="$(rclone obscure "$RCLONE_CRYPT_SALT")"
+CRYPT_PASSWORD_OBSCURED="$(rclone obscure "$CRYPT_PASSWORD_PLAIN")"
+CRYPT_SALT_OBSCURED="$(rclone obscure "$CRYPT_SALT_PLAIN")"
 
 rclone --config "$CONFIG_FILE" config create gdrive drive \
   client_id "$GOOGLE_DRIVE_CLIENT_ID" \
