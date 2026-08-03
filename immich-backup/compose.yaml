@@ -1,9 +1,9 @@
 name: immich-backup
 
 services:
-  backup:
+  immich-backup:
     image: rclone/rclone:latest
-    container_name: immich_backup
+    container_name: immich-backup
     restart: unless-stopped
     entrypoint:
       - /bin/sh

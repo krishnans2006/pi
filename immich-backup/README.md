@@ -66,13 +66,13 @@ resulting token and the values in `.env`.
 Run an extra backup immediately:
 
 ```sh
-docker compose run --rm backup copy /source encrypted: --create-empty-src-dirs
+docker compose run --rm immich-backup copy /source encrypted: --create-empty-src-dirs
 ```
 
 List the decrypted names in the remote:
 
 ```sh
-docker compose run --rm backup lsf encrypted:
+docker compose run --rm immich-backup lsf encrypted:
 ```
 
 Restore into a new local `restore` directory:
@@ -80,7 +80,7 @@ Restore into a new local `restore` directory:
 ```sh
 mkdir restore
 docker compose run --rm -v "$PWD/restore:/restore" \
-  backup copy encrypted: /restore
+  immich-backup copy encrypted: /restore
 ```
 
 The normal container retries a failed backup after one hour. After a
