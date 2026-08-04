@@ -105,7 +105,7 @@ services:
       - /run:exec,size=256M
       - /tmp:size=128M
       - /var/log:size=32M
-  
+
   rtlsdr-feed-fr24:
     image: ghcr.io/sdr-enthusiasts/docker-flightradar24:latest
     container_name: rtlsdr-feed-fr24
@@ -115,10 +115,11 @@ services:
     environment:
       - BEASTHOST=rtlsdr-ultrafeeder
       - FR24KEY=${FR24_SHARING_KEY}
+      - BIND_INTERFACE=0.0.0.0
     dns_search: . # prevents rare connection issues related to a bug in docker and fr24feed
     tmpfs:
       - /var/log:size=16M
-  
+
   # FlightAware
   rtlsdr-feed-piaware:
     image: ghcr.io/sdr-enthusiasts/docker-piaware:latest
