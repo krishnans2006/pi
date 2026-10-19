@@ -11,8 +11,10 @@ services:
     environment:
       # Optional: put your config options customization here. Examples:
       # ND_LOGLEVEL: debug
-      ND_ENABLEINSIGHTSCOLLECTOR: "false"
-      ND_JELLYFIN_ENABLED: "true"
+      - ND_ENABLEINSIGHTSCOLLECTOR=false
+      - ND_JELLYFIN_ENABLED=true
+      - ND_LASTFM_APIKEY=${ND_LASTFM_APIKEY}
+      - ND_LASTFM_SECRET=${ND_LASTFM_SECRET}
     volumes:
       - "/data/navidrome/data:/data"
       - "/data/navidrome/media:/music:ro"
