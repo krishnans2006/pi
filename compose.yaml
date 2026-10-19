@@ -3,3 +3,4 @@ include:
   - jellyfin/compose.yaml
   - immich/compose.yaml
   - immich-backup/compose.yaml
+  - navidrome/compose.yaml
