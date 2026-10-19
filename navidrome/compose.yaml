@@ -1,0 +1,18 @@
+services:
+  navidrome:
+    image: navidrome/navidrome:latest
+    container_name: navidrome
+    restart: unless-stopped
+    # must own the data folder and be able to read music folder(s)
+    user: 1002:1002
+    ports:
+      - 4533:4533
+      # 7359:7359/udp
+    environment:
+      # Optional: put your config options customization here. Examples:
+      # ND_LOGLEVEL: debug
+      ND_ENABLEINSIGHTSCOLLECTOR: "false"
+      ND_JELLYFIN_ENABLED: "true"
+    volumes:
+      - "/data/navidrome/data:/data"
+      - "/data/navidrome/media:/music:ro"

@@ -6,6 +6,7 @@ Ports:
 
 | Port | Service | Functionality |
 | --- | --- | --- |
+| 4533/tcp | Navidrome | Web Frontend (HTTP) |
 | 8000/tcp | RTL-SDR | Web Dashboard (tar1090) |
 | 8001/tcp | RTL-SDR | FlightRadar24 Feed Status |
 | 8002/tcp | RTL-SDR | FlightAware Feed Status + SkyAware Dashboard |
@@ -33,3 +34,8 @@ Things to set up:
   - `sudo chown -R jellyfin:jellyfin /data/jellyfin`
 - Add env vars for `rtl-sdr`:
   - `scp ~/Tech/Hobby/pi/rtl-sdr/.env krishnan@krishnan-pi.local:~/pi/rtl-sdr/.env`
+
+Users:
+- `krishnan` - 1000:1000
+- `jellyfin` - 1001:1001
+- `navidrome` - 1002:1002
