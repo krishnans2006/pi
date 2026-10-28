@@ -6,6 +6,10 @@ Ports:
 
 | Port | Service | Functionality |
 | --- | --- | --- |
+| 80/tcp | Caddy | HTTP reverse proxy |
+| 443/tcp | Caddy | HTTPS reverse proxy |
+| 443/udp | Caddy | HTTP/3 |
+| 2283/tcp | Immich | Web Frontend / API (HTTP) |
 | 4533/tcp | Navidrome | Web Frontend (HTTP) |
 | 8000/tcp | RTL-SDR | Web Dashboard (tar1090) |
 | 8001/tcp | RTL-SDR | FlightRadar24 Feed Status |
