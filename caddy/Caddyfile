@@ -1,25 +1,25 @@
 # Run Caddy through the root compose.yaml so these service names resolve
 
-music.krishy.dev {
+http://music.krishy.dev {
 	reverse_proxy navidrome:4533
 }
 
-media.krishy.dev {
+http://media.krishy.dev {
 	reverse_proxy jellyfin:8096
 }
 
-photos.krishy.dev {
+http://photos.krishy.dev {
 	reverse_proxy immich-server:2283
 }
 
-rtlsdr.krishy.dev {
+http://rtlsdr.krishy.dev {
 	reverse_proxy rtlsdr-ultrafeeder:80
 }
 
-rtlsdr-fr24.krishy.dev {
+http://rtlsdr-fr24.krishy.dev {
 	reverse_proxy rtlsdr-feed-fr24:8754
 }
 
-rtlsdr-fa.krishy.dev {
+http://rtlsdr-fa.krishy.dev {
 	reverse_proxy rtlsdr-feed-piaware:8080
 }
