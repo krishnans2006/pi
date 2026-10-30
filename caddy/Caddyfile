@@ -1,25 +1,33 @@
 # Run Caddy through the root compose.yaml so these service names resolve
 
-http://music.krishy.dev {
+# Caddy 2.10+ reuses this certificate for the subdomains below.
+*.krishy.dev {
+	tls {
+		dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+	}
+	abort
+}
+
+music.krishy.dev {
 	reverse_proxy navidrome:4533
 }
 
-http://media.krishy.dev {
+media.krishy.dev {
 	reverse_proxy jellyfin:8096
 }
 
-http://photos.krishy.dev {
+photos.krishy.dev {
 	reverse_proxy immich-server:2283
 }
 
-http://rtlsdr.krishy.dev {
+rtlsdr.krishy.dev {
 	reverse_proxy rtlsdr-ultrafeeder:80
 }
 
-http://rtlsdr-fr24.krishy.dev {
+rtlsdr-fr24.krishy.dev {
 	reverse_proxy rtlsdr-feed-fr24:8754
 }
 
-http://rtlsdr-fa.krishy.dev {
+rtlsdr-fa.krishy.dev {
 	reverse_proxy rtlsdr-feed-piaware:8080
 }

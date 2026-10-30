@@ -6,7 +6,7 @@ Ports:
 
 | Port | Service | Functionality |
 | --- | --- | --- |
-| 80/tcp | Caddy | HTTP reverse proxy |
+| 80/tcp | Caddy | HTTP-to-HTTPS redirects |
 | 443/tcp | Caddy | HTTPS reverse proxy |
 | 443/udp | Caddy | HTTP/3 |
 | 2283/tcp | Immich | Web Frontend / API (HTTP) |
@@ -26,6 +26,8 @@ Things to set up:
   - `cat ~/.ssh/id_ed25519.pub`
   - `ssh -T git@github.com`
 - https://sdr-enthusiasts.gitbook.io/ads-b/setting-up-the-host-system/running-docker-install
+- Add env vars for `caddy`:
+  - Set `CLOUDFLARE_API_TOKEN` in `caddy/.env` to a scoped API token with `Zone:DNS:Edit` and `Zone:Zone:Read` permissions
 - Set up storage:
   - `sudo fdisk /dev/nvme0n1` to match: `/dev/nvme0n1p1  2048 1000214527 1000212480 476.9G Linux filesystem`
   - `sudo mkfs.ext4 /dev/nvme0n1p1`
